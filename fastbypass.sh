@@ -3,14 +3,14 @@ echo ""
 echo -e "Bypass MDM"
 echo ""
 echo -e "Bypass on Recovery"
-if [ -d "/Volumes/Macintosh HD - Data" ]; then
-  diskutil rename "Macintosh HD - Data" "MacOS"
+if [ -d "/Volumes/MacOS - Data" ]; then
+  diskutil rename "MacOS - Data" "MacOSData"
 fi
 echo -e "User default: macbook, password: 1234"
 realName="${realName:=Macbook}"
 username="${username:=macbook}"
 passw="${passw:=1234}"
-dscl_path='/Volumes/MacOS/var/db/dslocal/nodes/Default' 
+dscl_path='/Volumes/MacOSData/var/db/dslocal/nodes/Default' 
 echo -e "Đang tạo user"
 # Create user
 dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username"
@@ -19,7 +19,7 @@ dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName
 dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName "$realName"
 dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UniqueID "501"
 dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" PrimaryGroupID 20
-mkdir "/Volumes/MacOS/Users/$username"
+mkdir "/Volumes/MacOSData/Users/$username"
 dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" NFSHomeDirectory "/Users/$username"
 dscl -f "$dscl_path" localhost -passwd "/Local/Default/Users/$username" "$passw"
 dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMembership $username
@@ -31,7 +31,7 @@ sh -c 'echo "0.0.0.0 acmdm.apple.com" >>/etc/hosts'
 sh -c 'echo "0.0.0.0 albert.apple.com" >>/etc/hosts'
 echo -e "Chặn host thành công"
 # echo "Remove config profile"
-touch /Volumes/MacOS/var/db/.AppleSetupDone
+touch /Volumes/MacOSData/var/db/.AppleSetupDone
 csrutil disable
 rm -rf /Volumes/MacOS/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
 rm -rf /Volumes/MacOS/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
