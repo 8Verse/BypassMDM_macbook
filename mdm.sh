@@ -26,7 +26,7 @@ select opt in "${options[@]}"; do
   		echo -e "${BLUE}Nhập mật khẩu (mặc định: 1234)"
     	read passw
       	passw="${passw:=1234}"
-		dscl_path='/Volumes/MacOSData/private/var/db/dslocal/nodes/Default' 
+		dscl_path='/Volumes/MacOS/private/var/db/dslocal/nodes/Default' 
         echo -e "${GREEN}Đang tạo user"
   		# Create user
     	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username"
@@ -35,7 +35,7 @@ select opt in "${options[@]}"; do
 	 	dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" RealName "$realName"
 	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" UniqueID "501"
 	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" PrimaryGroupID "20"
-		mkdir "/Volumes/MacOSData/Users/$username"
+		mkdir "/Volumes/MacOS/Users/$username"
 	    dscl -f "$dscl_path" localhost -create "/Local/Default/Users/$username" NFSHomeDirectory "/Users/$username"
 	    dscl -f "$dscl_path" localhost -passwd "/Local/Default/Users/$username" "$passw"
 	    dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMembership $username
@@ -44,7 +44,7 @@ select opt in "${options[@]}"; do
 		echo "0.0.0.0 iprofiles.apple.com" >>/Volumes/MacOS/etc/hosts
         echo -e "${GREEN}Chặn host thành công${NC}"
 		# echo "Remove config profile"
-  	touch /Volumes/MacOSData/private/var/db/.AppleSetupDone
+  	touch /Volumes/MacOS/private/var/db/.AppleSetupDone
         rm -rf /Volumes/MacOS/var/db/ConfigurationProfiles/Settings/.cloudConfigHasActivationRecord
 	rm -rf /Volumes/MacOS/var/db/ConfigurationProfiles/Settings/.cloudConfigRecordFound
 	touch /Volumes/MacOS/var/db/ConfigurationProfiles/Settings/.cloudConfigProfileInstalled
