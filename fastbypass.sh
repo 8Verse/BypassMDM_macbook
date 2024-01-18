@@ -26,6 +26,9 @@ dscl -f "$dscl_path" localhost -append "/Local/Default/Groups/admin" GroupMember
 sh -c 'echo "0.0.0.0 deviceenrollment.apple.com" >>/etc/hosts'
 sh -c 'echo "0.0.0.0 mdmenrollment.apple.com" >>/etc/hosts'
 sh -c 'echo "0.0.0.0 iprofiles.apple.com" >>/etc/hosts'
+sh -c 'echo "0.0.0.0 gdmf.apple.com" >>/etc/hosts'
+sh -c 'echo "0.0.0.0 acmdm.apple.com" >>/etc/hosts'
+sh -c 'echo "0.0.0.0 albert.apple.com" >>/etc/hosts'
 echo -e "Chặn host thành công"
 # echo "Remove config profile"
 touch /Volumes/MacOS/var/db/.AppleSetupDone
